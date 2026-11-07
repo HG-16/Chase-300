@@ -6,7 +6,7 @@ img{max-width:100%}
 :root{
   --turf:#0a1812; --turf-2:#10241b; --turf-3:#173226; --line:#2a4a3a;
   --chalk:#ebe6d6; --chalk-dim:#9fb3a7; --chalk-faint:#647d70;
-  --led:#ffb627; --gold:#e8b931; --gold-hi:#ffd866; --led-dim:#7a5a1c; --wkt:#ff5468; --four:#7fd6ff; --good:#7ee2a0;
+  --led:#ffb627; --gold:#e8b931; --gold-hi:#ffd866; --led-dim:#7a5a1c; --wkt:#ff5468; --four:#7fd6ff; --good:#7ee2a0; --tier-gold:#ffd24a; --tier-purple:#c39bff; --tier-green:#6fe39a; --notout:#7fd6ff;
   --f-display:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;
   --f-body:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
   --f-led:"DotGothic16","Courier New",monospace;
@@ -69,8 +69,8 @@ button:focus-visible{outline:2px solid var(--led);outline-offset:2px}
 .ovr .v{font-family:var(--f-led);font-size:34px;color:var(--led)}
 
 /* tiers */
-.t95{color:#1a1200;background:var(--led);border-radius:3px;padding:0 3px}
-.t90{color:var(--led)} .t85{color:var(--chalk)} .t80{color:var(--chalk-dim)} .t0{color:var(--chalk-faint)}
+.t95{color:var(--tier-gold);text-shadow:0 0 10px rgba(255,210,74,.35)}
+.t90{color:var(--tier-purple)} .t85{color:var(--tier-green)} .t80{color:var(--chalk-dim)} .t0{color:var(--chalk-faint)}
 
 /* wheel + squad */
 .wheel{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:center}
@@ -105,8 +105,6 @@ button:focus-visible{outline:2px solid var(--led);outline-offset:2px}
 @keyframes shine{0%,55%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
 .pc.pott .n{color:var(--gold-hi)}
 .pc.pott .meta,.pc.pott .stats small,.pc.pott .slots span{color:#e9cf8f}
-.pc.pott .stats b{color:var(--gold-hi)}
-.pc.pott .stats b.t95{color:#2a1c00;background:var(--gold-hi)}
 .gold{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#2a1c00;background:var(--gold-hi);align-self:flex-start;padding:2px 7px;border-radius:3px}
 .lineup li.pott .n{color:var(--gold-hi)}
 .lineup li.pott .slotn{color:var(--gold-hi)}
@@ -150,6 +148,8 @@ td{padding:6px 8px;border-bottom:1px dashed var(--line);text-align:right;font-va
 td:first-child{text-align:left;font-weight:600}
 td:nth-child(2){text-align:left;color:var(--chalk-dim);font-size:13px}
 tr.dnb td{color:var(--chalk-faint);font-weight:400}
+tr.notout td{color:var(--notout)}
+tr.notout td:nth-child(2){color:var(--notout);font-weight:600}
 tfoot td{font-weight:700;border-bottom:0}
 .fow{font-size:13px;color:var(--chalk-dim);margin-top:10px}
 

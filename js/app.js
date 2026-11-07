@@ -275,17 +275,16 @@ function finish(res) {
   renderLineup();
   const rows = res.bat.map((b) => {
     if (!(b.b > 0 || b.in || b.out)) return `<tr class="dnb"><td>${esc(b.p.name)}</td><td>did not bat</td><td></td><td></td><td></td><td></td><td></td></tr>`;
-    return `<tr><td>${esc(b.p.name)}${b.p === res.R.captain ? " (c)" : ""}</td><td>${b.out ? HOW[b.out] : "not out"}</td><td>${b.r}</td><td>${b.b}</td><td>${b.f}</td><td>${b.s}</td><td>${b.b ? ((b.r / b.b) * 100).toFixed(0) : "–"}</td></tr>`;
+    return `<tr class="${b.out ? "" : "notout"}"><td>${esc(b.p.name)}${b.out ? "" : "*"}${b.p === res.R.captain ? " (c)" : ""}</td><td>${b.out ? HOW[b.out] : "not out"}</td><td>${b.r}</td><td>${b.b}</td><td>${b.f}</td><td>${b.s}</td><td>${b.b ? ((b.r / b.b) * 100).toFixed(0) : "–"}</td></tr>`;
   }).join("");
   const ov = Math.floor(res.legal / 6) + "." + (res.legal % 6);
   $("c-result").innerHTML = `<div class="verdict ${v.won ? "" : "lost"}"><h3>${v.h}</h3><p>${v.p}</p></div>
-    <div class="row"><button class="btn" id="again">Draft a new XI</button><button class="btn ghost sm" id="rerun">Chase again with this XI</button></div>
+    <div class="row"><button class="btn" id="again">Draft a new XI</button></div>
     ${board.on ? `<form class="submit" id="submit"><input id="hb-name" maxlength="20" placeholder="Your name for the honours board" autocomplete="nickname" required><button class="btn sm" type="submit">Post score</button><span class="note" id="hb-msg"></span></form>` : ""}
     <div class="tablewrap"><table><thead><tr><th>Batter</th><th></th><th>R</th><th>B</th><th>4s</th><th>6s</th><th>SR</th></tr></thead>
     <tbody>${rows}</tbody><tfoot><tr><td>Total</td><td>${res.extras} extras · ${ov} ov</td><td>${res.runs}/${res.wk}</td><td colspan="4"></td></tr></tfoot></table></div>
     ${res.fow.length ? `<div class="fow"><span class="lbl">Fall of wickets</span><br>${res.fow.map((f) => `${f.runs}-${f.wk} (${esc(f.name)}, ${Math.floor(f.ball / 6)}.${f.ball % 6})`).join(" · ")}</div>` : ""}`;
   $("again").onclick = () => { clearTimeout(timer); st = fresh(); renderLineup(); renderPlay(); window.scrollTo({ top: 0, behavior: "smooth" }); };
-  $("rerun").onclick = () => startChase(false);
   if (board.on) {
     try { $("hb-name").value = localStorage.getItem("chase300-name") || ""; } catch (e) {}
     $("submit").onsubmit = (ev) => { ev.preventDefault(); board.post(res, $("hb-name").value.trim()); };
