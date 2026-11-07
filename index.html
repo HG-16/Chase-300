@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Chase 300</title>
+<meta name="description" content="The opposition made 300/0. Draft an XI from every T20 World Cup squad, 2007 to 2026, and chase 301 in 20 overs.">
+<meta name="theme-color" content="#0a1812">
+<meta property="og:title" content="The Chase 300">
+<meta property="og:description" content="Draft T20 World Cup legends and chase cricket's impossible 301.">
+<meta property="og:type" content="website">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Big+Shoulders+Display:wght@600;800;900&family=DotGothic16&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div class="board" aria-label="Opposition score 300 for 0 in 20 overs">
+      <div class="big num">300/0</div>
+      <div class="sub"><span>20.0 OV</span><span>TARGET 301</span></div>
+    </div>
+    <div>
+      <h1>They made 300 without losing a wicket. <em>Chase it.</em></h1>
+      <p>Spin for a real T20 World Cup squad, from South Africa 2007 to India 2026. Take one player, put him where he actually batted, and repeat until you have eleven. Then bat out 120 balls and see if your XI can do what nobody ever has.</p>
+      <div class="facts">
+        <span><b>297</b>India v Bangladesh, Hyderabad 2024</span>
+        <span><b>262</b>Punjab Kings' chase v KKR, Kolkata 2024</span>
+        <span><b>301</b>What you need</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="grid">
+    <section class="panel" aria-labelledby="xi-h">
+      <div class="ph"><h2 id="xi-h">Your XI</h2><span class="lbl num" id="picked">0 / 11 picked</span></div>
+      <ol class="lineup" id="lineup"></ol>
+      <div class="ratings">
+        <div class="meter"><div class="lbl">Anchor</div><div class="v num" id="r-anc">–</div><div class="bar"><i id="b-anc"></i></div><small>Top 6 BAT</small></div>
+        <div class="meter"><div class="lbl">Power</div><div class="v num" id="r-pow">–</div><div class="bar"><i id="b-pow"></i></div><small>Best 8 POW</small></div>
+        <div class="meter"><div class="lbl">Bowling</div><div class="v num" id="r-bwl">–</div><div class="bar"><i id="b-bwl"></i></div><small>Best 4 BWL</small></div>
+      </div>
+      <div class="checks"><span id="ck-k" class="no">✕ Keeper</span><span id="ck-c" class="no">✕ Captain</span></div>
+      <div class="capline" id="capline"></div>
+      <div class="ovr"><span class="lbl">Team rating</span><span class="v num" id="r-ovr">–</span></div>
+    </section>
+
+    <section class="panel play" id="play" aria-live="polite"></section>
+  </div>
+
+  <section class="panel" id="honours" hidden aria-labelledby="hb-h">
+    <div class="ph"><h2 id="hb-h">Honours board</h2><span class="lbl">Top 10 chases, all players</span></div>
+    <ol class="board-list" id="board-list"><li><span class="who">Loading…</span><span></span></li></ol>
+  </section>
+
+  <details class="how">
+    <summary>How it works</summary>
+    <div class="howgrid">
+      <div><h4>The draft</h4><p>Each spin lands on one squad from one T20 World Cup. Pick one player and drop him into a slot he really batted in. Picks are final. You get 3 re-rolls per draft, and a squad with nobody who fits your open slots gives you a free spin.</p></div>
+      <div><h4>BAT · Anchor</h4><p>How long he stays in. Only your top six count. A 300 chase dies fast if the top order is gone in the powerplay.</p></div>
+      <div><h4>POW · Power</h4><p>Strike rate and six-hitting. Your eight biggest hitters count, wherever they bat, so a slugger at number nine still helps.</p></div>
+      <div><h4>BWL · Bowling</h4><p>Your four best bowlers, wherever they bat. They conceded 300, but legends in the dugout lift the side: fewer soft dismissals, more boundaries.</p></div>
+      <div><h4>Golden cards</h4><p>The Player of the Tournament from each World Cup has a gold card, from Shahid Afridi in 2007 to Sanju Samson in 2026. Spot one, grab him.</p></div>
+      <div><h4>Captain</h4><p>Every captain carries a hidden captaincy rating. Draft as many captains as you like; the one with the best rating leads automatically. When a wicket falls, the side wobbles for a couple of overs, and a great leader keeps that wobble small. No captain at all and collapses come in clusters.</p></div>
+      <div><h4>Keeper</h4><p>No gloveman costs you a small penalty in the chase.</p></div>
+      <div><h4>Ratings</h4><p>Every card is a player at one tournament, so Kohli 2014 and Kohli 2022 are different cards. Numbers are fan estimates from form and reputation in that event, not official data.</p></div>
+    </div>
+  </details>
+  <footer>Unofficial fan-made game. Not affiliated with the ICC, any cricket board, team or player. Player names are used descriptively. <span id="best"></span></footer>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
