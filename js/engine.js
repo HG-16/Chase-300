@@ -18,7 +18,7 @@ function parseData(json) {
           name: p.name, lo, hi: hi || lo, year: s.year, team: s.team,
           rb: p.bat, rp: p.pow, rw: p.bwl,
           bat: lift(p.bat), pow: lift(p.pow), bwl: lift(p.bwl),
-          k: !!p.keeper, c: p.captaincy != null, cap: p.captaincy ?? null,
+          k: !!p.keeper, os: !!p.overseas, c: p.captaincy != null, cap: p.captaincy ?? null,
           pott: ed.pott === p.name,
         };
       }),

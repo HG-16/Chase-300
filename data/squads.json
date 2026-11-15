@@ -1,4 +1,33 @@
 {
+ "meta": {
+  "competition": "T20 World Cup",
+  "short": "T20 World Cup",
+  "blurb": "Spin for a real T20 World Cup squad, from South Africa 2007 to India 2026. Take one player, put him where he actually batted, and repeat until you have eleven. Then bat out 120 balls and see if your XI can do what nobody ever has.",
+  "facts": [
+   [
+    "297",
+    "Highest T20I total: India v Bangladesh, Hyderabad 2024"
+   ],
+   [
+    "265",
+    "Highest T20 chase: Punjab Kings v Delhi Capitals, IPL 2026"
+   ]
+  ],
+  "modes": [
+   {
+    "id": "authentic",
+    "label": "Authentic",
+    "desc": "Every spin can land on any squad from any T20 World Cup, 2007 to 2026."
+   },
+   {
+    "id": "nation",
+    "label": "Nation",
+    "desc": "Pick one country. Every spin lands on one of its World Cup squads, so your XI is that nation's all-time T20 side.",
+    "nation": true,
+    "minSquads": 4
+   }
+  ]
+ },
  "note": "Ratings are raw 0-100 fan estimates. The site lifts them for display. 'captaincy' is a hidden stat only captains carry.",
  "editions": {
   "2007": {
