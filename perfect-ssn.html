@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en" data-edition="ipl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Perfect Season</title>
+<meta name="description" content="Draft an XI, then play a full simulated IPL season or T20 World Cup with every stat. Can you win every match?">
+<meta name="theme-color" content="#0a1838">
+<meta property="og:title" content="Perfect Season">
+<meta property="og:description" content="Draft IPL legends and try to win every match of the season.">
+<meta property="og:type" content="website">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Big+Shoulders+Display:wght@600;800;900&family=DotGothic16&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="topbar">
+    <div class="brand">
+    <button class="logo" id="home" type="button" title="Start over" aria-label="Perfect Season. Start a new draft">
+      <span class="mini-board" aria-hidden="true"><b id="logo-n">16-0</b><small>PERFECT</small></span>
+      <span class="logo-t">Perfect<br>Season</span>
+    </button>
+    </div>
+    <div class="comp" role="group" aria-label="Edition" id="comp"></div>
+  </header>
+  <section class="hero">
+    <h1>Draft an XI. <span id="h1-comp">Play the IPL.</span> <em>Win every match.</em></h1>
+    <p id="blurb">Spin for real IPL franchise seasons and build your XI one pick at a time. Then take it through a full IPL season: fourteen league matches and the playoffs, against nine real squads. Here your bowlers actually bowl, so a batting line-up alone won't do it.</p>
+    <div class="facts" id="facts"><span><b>70</b>League matches, 14 of them yours</span><span><b>4</b>Teams reach the playoffs</span><span><b>16-0</b>The perfect season</span></div>
+  </section>
+
+  <div class="grid">
+    <section class="panel" aria-labelledby="xi-h">
+      <div class="ph"><h2 id="xi-h">Your XI</h2><span class="lbl num" id="picked">0 / 11 picked</span></div>
+      <ol class="lineup" id="lineup"></ol>
+      <div class="ratings">
+        <div class="meter"><div class="lbl">Anchor</div><div class="v num" id="r-anc">–</div><div class="bar"><i id="b-anc"></i></div><small>Top 6 BAT</small></div>
+        <div class="meter"><div class="lbl">Power</div><div class="v num" id="r-pow">–</div><div class="bar"><i id="b-pow"></i></div><small>Best 8 POW</small></div>
+        <div class="meter"><div class="lbl">Bowling</div><div class="v num" id="r-bwl">–</div><div class="bar"><i id="b-bwl"></i></div><small>Best 5 BWL</small></div>
+      </div>
+      <div class="checks"><span id="ck-k" class="no">✕ Keeper</span><span id="ck-c" class="no">✕ Captain</span></div>
+      <div class="capline" id="capline"></div>
+    </section>
+
+    <section class="panel play" id="play" aria-live="polite"></section>
+  </div>
+
+  <details class="how">
+    <summary>How it works</summary>
+    <div class="howgrid">
+      <div><h4>The draft</h4><p>Each spin lands on one squad from one season: an IPL franchise or a World Cup team, depending on the edition you pick at the top. Pick one player and drop him into a slot he really batted in. Picks are final. You get 3 re-rolls, and a squad with nobody who fits gives you a free spin.</p></div>
+      <div><h4>Modes</h4><p>IPL: Easy lets you draft anyone, Authentic allows at most 4 overseas players. World Cup: Authentic spins any squad, Nation sticks to one country's squads.</p></div>
+      <div><h4>IPL season</h4><p>Ten teams: yours and nine real IPL squads from random years. Everyone plays 14 league matches, 70 in all. The top four go to Qualifier 1, the Eliminator, Qualifier 2 and the final.</p></div>
+      <div><h4>World Cup</h4><p>Ten teams: yours and nine real national squads. Everyone plays everyone once, 45 matches in all. The top four go to the semi-finals (1st v 4th, 2nd v 3rd), then the final.</p></div>
+      <div><h4>Batting</h4><p>BAT decides how long a batter lasts, POW how fast he scores. Line-up order matters: openers face the new ball, finishers arrive at the death.</p></div>
+      <div><h4>Bowling</h4><p>Your five best BWL ratings bowl four overs each. The top two share the powerplay and the death. Good bowlers take wickets and squeeze the run rate; part-timers get hit.</p></div>
+      <div><h4>Captain and keeper</h4><p>The best captain you draft leads, and his hidden captaincy rating steadies the side after a wicket. No keeper means more runs leak in the field.</p></div>
+      <div><h4>Opponents</h4><p>Each opponent fields its best XI from that year's squad. Any player you drafted is left out of their side, so nobody plays against himself.</p></div>
+      <div><h4>Perfect run</h4><p>IPL: all 14 league matches, Qualifier 1 and the final, 16-0. World Cup: all 9 league matches, the semi-final and the final, 11-0. One defeat ends the perfect run, but the trophy is still there to win.</p></div>
+    </div>
+  </details>
+  <footer>Unofficial fan-made game. Not affiliated with the ICC, the BCCI, the IPL, any board, franchise or player. Player names are used descriptively. Ratings are fan estimates. <span id="best"></span> <!--NAV--><a class="navlink" href="index.html">Also play: The Chase 300 →</a><!--/NAV--></footer>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/flags.js"></script>
+<script src="js/season-engine.js"></script>
+<script src="js/season.js"></script>
+</body>
+</html>

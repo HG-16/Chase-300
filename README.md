@@ -7,7 +7,8 @@ Plain HTML, CSS and JavaScript. No build step, no framework, no server code. It 
 ## What's in the folder
 
 ```
-index.html          the page
+index.html          The Chase 300
+perfect-ssn.html    Perfect Season (the IPL season game)
 css/style.css       all styling
 js/engine.js        ratings and the 120-ball chase simulation
 js/app.js           the draft, the live chase, scorecard and honours board
@@ -99,6 +100,19 @@ Each mode (and each nation) keeps its own best score and honours board. Flags li
 ## My chases
 
 The counter next to the 300/0 logo shows how many times you have chased 301. Every successful chase is saved in your browser with its full scorecard (up to 100). Tap the counter to see them, fastest first; open one to see the batting card, make its scorecard image again, or delete it. They live in this browser only, so another phone or a cleared browser starts at 0.
+
+## Perfect Season (second game)
+
+`perfect-ssn.html` is a second game on the same site, at `https://YOUR-USERNAME.github.io/chase300/perfect-ssn.html`. The two pages link to each other.
+
+- **Draft**: the same draft as The Chase 300. IPL has Easy and Authentic (max 4 overseas) modes.
+- **Season**: your XI joins nine real IPL squads from random years. 70 league matches (14 each), then Qualifier 1, Eliminator, Qualifier 2 and the final. Play your matches one at a time or sim ahead.
+- **World Cup edition**: switch at the top right. Same World Cup draft (Authentic or Nation mode), then a ten-team World Cup: everyone plays everyone once (9 matches each), top four to the semi-finals (1st v 4th, 2nd v 3rd), then the final. A perfect World Cup is 11-0. In Nation mode your own country sits out as an opponent.
+- **Real bowling**: your five best BWL ratings bowl four overs each, so a side without bowlers gets hit.
+- **Stats**: every match has a scorecard for your side; tabs show the league table with net run rate, your batting and bowling figures, and awards (Orange Cap, Purple Cap, MVP).
+- **Perfect season**: win all 14 league matches, Qualifier 1 and the final, 16-0. Your best season and number of perfect seasons are kept in your browser.
+
+It uses `data/ipl.json`, so squad or rating edits change both games. Its code is `js/season-engine.js` (match and season simulation) and `js/season.js` (the page).
 
 ## Sharing a scorecard
 
