@@ -55,9 +55,13 @@ const osLimit = () => curMode().overseas || Infinity;
 const osCount = () => st.xi.filter((p) => p && p.os).length;
 const picked = () => st.xi.filter(Boolean).length;
 const pool = () => (st.nation && !st.widen ? SQ.filter((s) => s.team === st.nation) : SQ);
+// the nations that take part in a Perfect Season tournament (meta.seasonTeams), or everyone
+const inSeason = (team) => !Array.isArray(META.seasonTeams) || META.seasonTeams.includes(team);
+// opponents: the season teams minus your own nation; the reserve (meta.seasonReserve) steps in for it
+const isOpponent = (team) => team !== st.nation && (inSeason(team) || (st.nation && inSeason(st.nation) && team === META.seasonReserve));
 function nations(min) {
   const m = new Map();
-  SQ.forEach((s) => m.set(s.team, (m.get(s.team) || 0) + 1));
+  SQ.forEach((s) => { if (inSeason(s.team)) m.set(s.team, (m.get(s.team) || 0) + 1); });
   return [...m].filter(([, n]) => n >= (min || 1)).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
 }
 const tier = (v) => (v >= 95 ? "t95" : v >= 90 ? "t90" : v >= 85 ? "t85" : v >= 80 ? "t80" : "t0");
@@ -71,7 +75,6 @@ const bestKey = () => "perfect-ssn-best-" + SET.id;
 /* ---------- hero and edition picker ---------- */
 function renderHero() {
   const F = FMT();
-  $("logo-n").textContent = F.board;
   $("h1-comp").textContent = F.title;
   $("blurb").textContent = F.blurb;
   $("facts").innerHTML = F.facts.map(([n, t]) => `<span><b>${esc(n)}</b>${esc(t)}</span>`).join("");
@@ -151,7 +154,7 @@ function renderPlay() {
     const list = nations(curMode().minSquads);
     el.innerHTML = `<div class="ph"><h2>Choose a nation</h2><button class="linkbtn" id="backmode">Change mode</button></div>
       <div class="nations">${list.map(([n, c]) => `<button class="nation" data-nation="${esc(n)}">${flag(n)}<span class="nn">${esc(n)}</span><span class="nc">${c} World Cups</span></button>`).join("")}</div>
-      <p class="note">Every spin lands on one of your nation's squads. It sits out as an opponent, so you never play yourself.</p>`;
+      <p class="note">Every spin lands on one of your nation's squads. Your nation can't play itself, so ${esc(META.seasonReserve || "another nation")} takes its place in the World Cup.`;
     $("backmode").onclick = () => { st.stage = "mode"; renderPlay(); };
     el.querySelectorAll(".nation").forEach((b) => (b.onclick = () => { st.nation = b.dataset.nation; st.stage = "spin"; renderLineup(); renderPlay(); spin(false); }));
     return;
@@ -165,7 +168,7 @@ function renderPlay() {
         <ul>${attack.map((p) => `<li><span>${esc(p.name)}</span><b class="num ${tier(p.bwl)}">${p.bwl}</b></li>`).join("")}</ul>
         ${attack.some((p) => p.rw < 55) ? `<p class="note warn">You are short of bowlers. Part-timers will go for plenty.</p>` : ""}</div>
       <label class="namefield"><span class="lbl">Team name</span><input id="teamname" maxlength="18" value="${esc(st.name)}" autocomplete="off"></label>
-      <p>${FMT().note}</p>
+      <p>${seasonNote()}</p>
       <div class="row" style="margin-top:14px"><button class="btn" id="go">Start the ${esc(FMT().unit)}</button></div>`;
     $("go").onclick = startSeason;
     $("teamname").addEventListener("keydown", (e) => { if (e.key === "Enter") startSeason(); });
@@ -242,14 +245,24 @@ function startOver() {
 $("home").onclick = startOver;
 
 /* ---------- season ---------- */
+// how many opponents this tournament will have, given the edition and the chosen nation
+function oppCount() {
+  const k = new Set(SQ.filter((s) => s.players.length >= 11 && isOpponent(s.team)).map((s) => lineage(s.team)));
+  return Math.min(9, k.size);
+}
+function seasonNote() {
+  if (FMT().id === "ipl") return FMT().note;
+  const n = oppCount();
+  return `${n} league matches against ${n} real national sides, then a semi-final and the final. Win every one for a perfect World Cup, ${n + 2}-0.`;
+}
 function startSeason() {
   const nm = ($("teamname").value || "").trim() || "My XI";
   st.name = nm; try { localStorage.setItem("perfect-ssn-name", nm); } catch (e) {}
   const mine = { id: "me", name: nm, user: true, xi: st.xi.slice() };
   const taken = new Set(st.xi.map((p) => p.name));
   const lines = new Map();
-  // one squad per franchise or nation (only squads that can field eleven); in Nation mode your own country sits out
-  SQ.forEach((s) => { if ((st.nation && s.team === st.nation) || s.players.length < 11) return; const k = lineage(s.team); (lines.get(k) || lines.set(k, []).get(k)).push(s); });
+  // one squad per franchise or nation (only squads that can field eleven); in Nation mode your own country sits out and the reserve steps in
+  SQ.forEach((s) => { if (s.players.length < 11 || !isOpponent(s.team)) return; const k = lineage(s.team); (lines.get(k) || lines.set(k, []).get(k)).push(s); });
   const keys = [...lines.keys()].sort(() => Math.random() - 0.5).slice(0, 9);
   const opp = keys.map((k, i) => { const list = lines.get(k), s = list[Math.floor(Math.random() * list.length)]; return { id: "o" + i, name: s.team + " " + s.year, base: s.team, year: s.year, champ: s.champ, xi: buildXI(s, taken) }; });
   st.season = newSeason([mine].concat(opp), Math.random, FMT().id);
@@ -385,7 +398,7 @@ function renderSeason() {
   if (S.stage === "league") {
     const nf = S.fixtures.find((f) => !f.done && (f.a.id === "me" || f.b.id === "me"));
     const opp = nf ? (nf.a.id === "me" ? nf.b : nf.a) : null;
-    status = `Next: Match ${rec.w + rec.l + 1} of ${FMT().games} v <b>${esc(short(opp))}</b>`;
+    status = `Next: Match ${rec.w + rec.l + 1} of ${S.teams.length === 10 && FMT().id === "ipl" ? 14 : S.teams.length - 1} v <b>${esc(short(opp))}</b>`;
     controls = `<button class="btn" id="next">Play match ${rec.w + rec.l + 1}</button><button class="btn ghost sm" id="simall">Sim rest of league (${leagueLeft})</button>`;
   } else if (S.stage === "playoffs") {
     if (myGame) { const opp = myGame.a.id === "me" ? myGame.b : myGame.a; status = `<b>${myGame.name}</b> v <b>${esc(short(opp))}</b>`; controls = `<button class="btn" id="next">Play the ${myGame.name.toLowerCase()}</button>`; }

@@ -26,7 +26,19 @@
     "nation": true,
     "minSquads": 4
    }
-  ]
+  ],
+  "seasonTeams": [
+   "India",
+   "Australia",
+   "England",
+   "South Africa",
+   "New Zealand",
+   "Pakistan",
+   "Sri Lanka",
+   "West Indies",
+   "Zimbabwe"
+  ],
+  "seasonReserve": "Afghanistan"
  },
  "note": "Ratings are raw 0-100 fan estimates. The site lifts them for display. 'captaincy' is a hidden stat only captains carry.",
  "editions": {
