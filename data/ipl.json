@@ -16822,14 +16822,14 @@
      "slots": "5-7",
      "bat": 83,
      "pow": 85,
-     "bwl": 92,
+     "bwl": 92
     },
     {
      "name": "Ishaan Daftari",
      "slots": "1-11",
-     "bat": 01,
-     "pow": 01,
-     "bwl": 01,
+     "bat": 1,
+     "pow": 1,
+     "bwl": 1
     },
     {
      "name": "Aditya Wadje",
