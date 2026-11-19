@@ -16815,6 +16815,69 @@
   },
   {
    "year": 2026,
+   "team": "Gandhi Cricket",
+   "players": [
+    {
+    {
+     "name": "Akshat Jain",
+     "slots": "5-7",
+     "bat": 83,
+     "pow": 85,
+     "bwl": 92,
+    },
+    {
+     "name": "Ishaan Daftari",
+     "slots": "1-11",
+     "bat": 01,
+     "pow": 01,
+     "bwl": 01,
+    },
+    {
+     "name": "Aditya Wadje",
+     "slots": "3-5",
+     "bat": 82,
+     "pow": 74,
+     "bwl": 85
+    },
+    {
+     "name": "Shantanu Shrivastava",
+     "slots": "7-8",
+     "bat": 74,
+     "pow": 58,
+     "bwl": 86
+    },
+    {
+     "name": "Himabh Gemini",
+     "slots": "1-11",
+     "bat": 99,
+     "pow": 99,
+     "bwl": 99
+    },
+    {
+     "name": "Divyasnsh Agrawal",
+     "slots": "1-2",
+     "bat": 89,
+     "pow": 74,
+     "bwl": 90
+    },
+    {
+     "name": "Parth Shandilaya",
+     "slots": "1-4",
+     "bat": 92,
+     "pow": 95,
+     "bwl": 96
+    },
+    {
+     "name": "Ajmal CreamShake",
+     "slots": "1-2",
+     "bat": 81,
+     "pow": 99,
+     "bwl": 87
+    }
+   ]
+  },
+  {
+   "year": 2026,
    "team": "Sunrisers Hyderabad",
    "players": [
     {
